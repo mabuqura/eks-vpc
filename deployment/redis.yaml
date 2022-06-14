@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: default
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: redis
+        image: 757131707204.dkr.ecr.us-east-1.amazonaws.com/node:mongo
+        securityContext:
+         privileged: true
+        ports:
+        - containerPort: 6379
+        imagePullPolicy: Always
+#        resources:
+#          requests:
+#            memory: "256Mi"
+#            cpu: "250m"
+#          limits:
+#            memory: "256Mi"
+#            cpu: "250m"
